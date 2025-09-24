@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8" />
+    <title>Lista Items</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 700px;
+            margin: 50px auto;
+            padding: 10px;
+            background: #f7f9fc;
+        }
+        h1 {
+            text-align: center;
+        }
+        form {
+            margin-bottom: 30px;
+            display: flex;
+            gap: 10px;
+        }
+        input[type="text"] {
+            flex-grow: 1;
+            padding: 8px;
+            font-size: 16px;
+        }
+        button {
+            padding: 8px 15px;
+            background: #007bff;
+            border: none;
+            color: white;
+            cursor: pointer;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+        }
+        th, td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        th {
+            background: #007bff;
+            color: white;
+        }
+        a.delete-btn {
+            color: red;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        a.delete-btn:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <h1>Lista Items</h1>
+    
+    <form action="/add" method="POST">
+        <input type="text" name="name" placeholder="Inserisci nuovo item" required />
+        <button type="submit">Aggiungi</button>
+    </form>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Azioni</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in items %}
+            <tr>
+                <td>{{ item.id }}</td>
+                <td>{{ item.name }}</td>
+                <td><a class="delete-btn" href="/delete/{{ item.id }}">Cancella</a></td>
+            </tr>
+            {% else %}
+            <tr><td colspan="3" style="text-align:center;">Nessun item presente</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
